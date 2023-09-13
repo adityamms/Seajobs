@@ -15,11 +15,14 @@ const handleChange = async (e, value) => {
     setData((prev) => {
       return { ...prev, page: page };
     });
-    const res = await axios.post("http://localhost:3000/api/find", {
-      page,
-      job_post_title,
-      location,
-    });
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/find`,
+      {
+        page,
+        job_post_title,
+        location,
+      }
+    );
     dig(res);
   } catch (error) {
     console.log(error);

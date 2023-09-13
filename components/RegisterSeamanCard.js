@@ -26,7 +26,10 @@ export default function RegisterSeamanCard() {
 
     try {
       // Your data posting logic here, e.g., an API request
-      let coba = await axios.post(`${process.env.API_URL}/api/hello`, form);
+      let coba = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/hello`,
+        form
+      );
       notify.sukses("berhasil register");
     } catch (error) {
       notify.gagal("gagal register");
