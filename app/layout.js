@@ -1,10 +1,8 @@
-"use client";
 import Footbar from "@/components/Footbar";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ThemeProvider from "@/components/ThemeProvider";
 import UserContext from "@/components/UserProvider";
-// import { SessionProvider } from "next-auth/react";
 
 export const metadata = {
   title: "Next.js",
