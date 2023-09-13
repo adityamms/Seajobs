@@ -23,7 +23,10 @@ export default function loginForm() {
     e.preventDefault();
     try {
       let res = await axios
-        .post(`${process.env.NEXT_PUBLIC_API_URL}/api/` + data.login_as, data)
+        .post(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/company` + data.login_as,
+          data
+        )
         .then(async (res) => {
           let datanya = JSON.stringify(res.data);
           Cookies.set("user", datanya, { expires: 7 });
