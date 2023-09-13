@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import React, { use, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Toaster, { notify } from "./toaster";
 import Cookies from "js-cookie";
 
@@ -11,7 +11,8 @@ const style = {
 
 let user = Cookies.get("user");
 let convert = user && JSON.parse(user);
-let { email, type } = convert && convert.data;
+let type = convert && convert.data.type;
+let email = convert && convert.data.email;
 
 export default function Postjobs() {
   let [form, setForm] = useState({ email: email });
@@ -20,7 +21,7 @@ export default function Postjobs() {
     e.preventDefault();
     try {
       if (type) {
-        return notify.gagal("-_- cant post as seaman");
+        return notify.gagal("cant post as seaman");
       }
       const res = await axios.patch(
         "http://localhost:3000/api/company_acc",
