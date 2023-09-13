@@ -28,7 +28,7 @@ export default function Cardjob(props) {
 
   useEffect(() => {
     let fetch = async () => {
-      let res = await axios.get("http://localhost:3000/api/hello");
+      let res = await axios.get(`${process.env.API_URL}/api/hello`);
       if (res.status === 200) {
         dig(res);
       } else console.log("error fetching");

@@ -29,7 +29,7 @@ export default function Myaccountcard() {
     e.preventDefault();
     try {
       let res = await axios.patch(
-        "http://localhost:3000/api/company_acc",
+        `${process.env.API_URL}/api/company_acc`,
         namainput
       );
       notify.sukses("berhasil upload");

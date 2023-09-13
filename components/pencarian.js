@@ -14,7 +14,7 @@ export default function pencarian(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let ress = await axios.post("http://localhost:3000/api/find", {
+      let ress = await axios.post(`${process.env.API_URL}/api/find`, {
         job_post_title: data.job_post_title,
         location: data.location,
       });
