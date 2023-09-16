@@ -29,7 +29,7 @@ export default function Myaccountcard() {
     e.preventDefault();
     try {
       let res = await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/company_acc`,
+        `${process.env.NEXT_PUBLIC_NETLIFY_URI}/api/company_acc`,
         namainput
       );
       notify.sukses("berhasil upload");

@@ -16,7 +16,7 @@ const handleChange = async (e, value) => {
       return { ...prev, page: page };
     });
     const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/find`,
+      `${process.env.NEXT_PUBLIC_NETLIFY_URI}/api/find`,
       {
         page,
         job_post_title,

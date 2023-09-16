@@ -24,7 +24,7 @@ export default function loginForm() {
     try {
       let res = await axios
         .post(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/company` + data.login_as,
+          `${process.env.NEXT_PUBLIC_NETLIFY_URI}/api/company` + data.login_as,
           data
         )
         .then(async (res) => {

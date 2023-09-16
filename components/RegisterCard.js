@@ -29,7 +29,7 @@ export default function RegisterCard() {
     try {
       // Your data posting logic here, e.g., an API request
       let coba = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/hello`,
+        `${process.env.NEXT_PUBLIC_NETLIFY_URI}/api/hello`,
         form
       );
       notify.sukses("berhasil register");
