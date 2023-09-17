@@ -28,11 +28,7 @@ export default function Cardjob(props) {
 
   useEffect(() => {
     let fetch = async () => {
-      let res = await axios.get(
-        `${
-          process.env.NEXT_PUBLIC_API_URL + process.env.NEXT_PUBLIC_NETLIFY_URI
-        }/api/hello`
-      );
+      let res = await axios.get(`/api/hello`);
       if (res.status === 200) {
         dig(res);
       } else console.log("error fetching");
@@ -69,7 +65,7 @@ export default function Cardjob(props) {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 p-5 justify-center items-center">
         {data.akhir.map((item) => {
           return (
-            <>
+            <div key={crypto.randomUUID()}>
               <div className="p-5">
                 <div
                   className={`grid border-2 w-80 mt-10 mb-10 rounded-2xl p-5 shadow-md border-green-950 cursor-point bg-white`}
@@ -107,7 +103,7 @@ export default function Cardjob(props) {
                   <p>2 hari yang lalu</p>
                 </div>
               </div>
-            </>
+            </div>
           );
         })}
       </div>

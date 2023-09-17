@@ -28,12 +28,7 @@ export default function RegisterCard() {
     e.preventDefault();
     try {
       // Your data posting logic here, e.g., an API request
-      let coba = await axios.post(
-        `${
-          process.env.NEXT_PUBLIC_API_URL + process.env.NEXT_PUBLIC_NETLIFY_URI
-        }/api/hello`,
-        form
-      );
+      let coba = await axios.post(`/api/hello`, form);
       notify.sukses("berhasil register");
       setTimeout(() => {
         router.push("/login");

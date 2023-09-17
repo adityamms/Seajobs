@@ -28,12 +28,7 @@ export default function Myaccountcard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await axios.patch(
-        `${
-          process.env.NEXT_PUBLIC_API_URL + process.env.NEXT_PUBLIC_NETLIFY_URI
-        }/api/company_acc`,
-        namainput
-      );
+      let res = await axios.patch(`/api/company_acc`, namainput);
       notify.sukses("berhasil upload");
     } catch (error) {
       notify.gagal("error");

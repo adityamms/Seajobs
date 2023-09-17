@@ -14,15 +14,10 @@ export default function pencarian(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let ress = await axios.post(
-        `${
-          process.env.NEXT_PUBLIC_API_URL + process.env.NEXT_PUBLIC_NETLIFY_URI
-        }/api/find`,
-        {
-          job_post_title: data.job_post_title,
-          location: data.location,
-        }
-      );
+      let ress = await axios.post(`/api/find`, {
+        job_post_title: data.job_post_title,
+        location: data.location,
+      });
       let akhir = [];
       let coba =
         ress &&
