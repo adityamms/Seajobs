@@ -15,7 +15,9 @@ export default function pencarian(props) {
     e.preventDefault();
     try {
       let ress = await axios.post(
-        `${process.env.NEXT_PUBLIC_NETLIFY_URI}/api/find`,
+        `${
+          process.env.NEXT_PUBLIC_API_URL + process.env.NEXT_PUBLIC_NETLIFY_URI
+        }/api/find`,
         {
           job_post_title: data.job_post_title,
           location: data.location,

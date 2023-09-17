@@ -24,7 +24,9 @@ export default function Postjobs() {
         return notify.gagal("cant post as seaman");
       }
       const res = await axios.patch(
-        `${process.env.NEXT_PUBLIC_NETLIFY_URI}/company_acc`,
+        `${
+          process.env.NEXT_PUBLIC_API_URL + process.env.NEXT_PUBLIC_NETLIFY_URI
+        }/company_acc`,
         form
       );
       notify.sukses("berhasil post");

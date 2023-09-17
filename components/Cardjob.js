@@ -29,7 +29,9 @@ export default function Cardjob(props) {
   useEffect(() => {
     let fetch = async () => {
       let res = await axios.get(
-        `${process.env.NEXT_PUBLIC_NETLIFY_URI}/api/hello`
+        `${
+          process.env.NEXT_PUBLIC_API_URL + process.env.NEXT_PUBLIC_NETLIFY_URI
+        }/api/hello`
       );
       if (res.status === 200) {
         dig(res);
@@ -46,11 +48,16 @@ export default function Cardjob(props) {
       setData((prev) => {
         return { ...prev, page: page };
       });
-      const res = await axios.post(".netlify/functions/api/find", {
-        page,
-        job_post_title,
-        location,
-      });
+      const res = await axios.post(
+        `${
+          process.env.NEXT_PUBLIC_API_URL + process.env.NEXT_PUBLIC_NETLIFY_URI
+        }/api/find`,
+        {
+          page,
+          job_post_title,
+          location,
+        }
+      );
       dig(res);
     } catch (error) {
       console.log(error);
