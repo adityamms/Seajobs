@@ -27,10 +27,15 @@ export default function Cardjob(props) {
   };
 
   useEffect(() => {
+    let sendDate = new Date().getTime();
+
     let fetch = async () => {
       let res = await axios.get(`.netlify/functions/hello`);
       if (res.status === 200) {
+        let receiveDate = new Date().getTime();
+        let responseTimeMs = receiveDate - sendDate;
         dig(res);
+        console.log(responseTimeMs);
       } else console.log("error fetching");
     };
     fetch();
