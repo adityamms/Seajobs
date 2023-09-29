@@ -1,7 +1,6 @@
 [build]
 functions = "functions"
-node_bundler = "esbuild"
-command = "npm run build"  # Adjust this to your build command if needed
+command = "npm run build"
 
 [functions]
 node_bundler = "esbuild"
