@@ -37,6 +37,7 @@ export default function Cardjob(props) {
         dig(res);
         console.log(responseTimeMs);
       } else console.log("error fetching");
+      console.log(responseTimeMs);
     };
     fetch();
   }, []);
