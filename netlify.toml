@@ -1,2 +1,12 @@
+[build]
+functions = "functions"
+node_bundler = "esbuild"
+command = "npm run build"  # Adjust this to your build command if needed
+
 [functions]
-  included_files = ["!node_modules/A_LARGE_MODULE/**/*"]
+node_bundler = "esbuild"
+
+[context.production]
+environment = { NODE_VERSION = "14" }  # Specify the desired Node.js version
+[context.deploy-preview]
+environment = { NODE_VERSION = "14" }  # Specify the desired Node.js version

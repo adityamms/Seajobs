@@ -1,6 +1,6 @@
-import { connectToDB } from "@/utils/conectDb";
-import employer from "@/model/employer";
-import seaman from "@/model/seaman";
+import { connectToDB } from "@/utils/conectDb.js";
+import employer from "@/model/employer.js";
+import seaman from "@/model/seaman.js";
 
 export default async function hello(req, res) {
   await connectToDB();

@@ -28,7 +28,7 @@ export default function Cardjob(props) {
 
   useEffect(() => {
     let fetch = async () => {
-      let res = await axios.get(`/api/hello`);
+      let res = await axios.get(`.netlify/functions/hello`);
       if (res.status === 200) {
         dig(res);
       } else console.log("error fetching");
@@ -44,16 +44,11 @@ export default function Cardjob(props) {
       setData((prev) => {
         return { ...prev, page: page };
       });
-      const res = await axios.post(
-        `${
-          process.env.NEXT_PUBLIC_API_URL + process.env.NEXT_PUBLIC_NETLIFY_URI
-        }/api/find`,
-        {
-          page,
-          job_post_title,
-          location,
-        }
-      );
+      const res = await axios.post(`.netlify/functions/find`, {
+        page,
+        job_post_title,
+        location,
+      });
       dig(res);
     } catch (error) {
       console.log(error);
@@ -63,49 +58,52 @@ export default function Cardjob(props) {
   return (
     <>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 p-5 justify-center items-center">
-        {data.akhir.map((item) => {
-          return (
-            <div key={crypto.randomUUID()}>
-              <div className="p-5">
-                <div
-                  className={`grid border-2 w-80 mt-10 mb-10 rounded-2xl p-5 shadow-md border-green-950 cursor-point bg-white`}
-                >
-                  <h2>SALT</h2>
-                  <h1 className=" font-medium">{item.job_post_title}</h1>
-                  <h3 className="mt-2">{item.location}</h3>
-                  <div className="flex gap-5">
-                    <div className=" bg-slate-200 mt-2 mb-2 rounded-md text-sm p-1">
-                      {item.salary} a month
+        {data &&
+          data.akhir.map((item) => {
+            return (
+              <div key={crypto.randomUUID()}>
+                <div className="p-5">
+                  <div
+                    className={`grid border-2 w-80 mt-10 mb-10 rounded-2xl p-5 shadow-md border-green-950 cursor-point bg-white`}
+                  >
+                    <h2>SALT</h2>
+                    <h1 className=" font-medium">{item.job_post_title}</h1>
+                    <h3 className="mt-2">{item.location}</h3>
+                    <div className="flex gap-5">
+                      <div className=" bg-slate-200 mt-2 mb-2 rounded-md text-sm p-1">
+                        {item.salary} a month
+                      </div>
+                      <div className=" bg-slate-200 mt-2 mb-2 rounded-md text-sm p-1">
+                        Type : {item.commitment_type}
+                      </div>
                     </div>
-                    <div className=" bg-slate-200 mt-2 mb-2 rounded-md text-sm p-1">
-                      Type : {item.commitment_type}
+                    <div className="grid mb-2">
+                      {item.visa_sponsorship && (
+                        <p className="text-amber-700">visa sponsorship</p>
+                      )}
+
+                      {item.forreignn_applicant && (
+                        <p className=" text-amber-700">
+                          forreignn applicant can apply
+                        </p>
+                      )}
+
+                      {item.remote_job && (
+                        <p className="text-amber-700">support remote job</p>
+                      )}
+                      {item.visa && (
+                        <p className="text-amber-700">visa needed</p>
+                      )}
                     </div>
+                    <h3 className="mb-2">
+                      Description : <br /> {item.job_description}
+                    </h3>
+                    <p>2 hari yang lalu</p>
                   </div>
-                  <div className="grid mb-2">
-                    {item.visa_sponsorship && (
-                      <p className="text-amber-700">visa sponsorship</p>
-                    )}
-
-                    {item.forreignn_applicant && (
-                      <p className=" text-amber-700">
-                        forreignn applicant can apply
-                      </p>
-                    )}
-
-                    {item.remote_job && (
-                      <p className="text-amber-700">support remote job</p>
-                    )}
-                    {item.visa && <p className="text-amber-700">visa needed</p>}
-                  </div>
-                  <h3 className="mb-2">
-                    Description : <br /> {item.job_description}
-                  </h3>
-                  <p>2 hari yang lalu</p>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
       <div className="flex justify-center mb-20 mt-24">
         <Pagination

@@ -1,12 +1,11 @@
-import Seaman from "@/model/seaman"; // Make sure to use the correct model name
+import Seaman from "@/model/seaman.js";
 import { connectToDB } from "@/utils/conectDb";
-import { Binary } from "mongodb";
 
-export default async function seamen(req, res) {
+exports.handler = async (event, context) => {
   try {
     const connect = await connectToDB();
 
-    if (req.method === "POST") {
+    if (event.httpMethod === "POST") {
       console.log(req.body);
       const { user_email, user_password } = req.body;
 
@@ -17,22 +16,34 @@ export default async function seamen(req, res) {
       });
 
       if (!cari) {
-        return res.status(404).json({ msg: "Tidak ada" });
+        return {
+          statusCode: 404, // or any other HTTP status code
+          body: JSON.stringify({ message: "not found" }),
+        };
       }
 
       // Check both email and password for a match
       if (user_email !== cari.email || user_password !== cari.password) {
-        return res.status(400).json({ msg: "Email / password salah" });
+        return {
+          statusCode: 400, // or any other HTTP status code
+          body: JSON.stringify({ msg: "email password salah" }),
+        };
       } else {
-        res.status(200).json({ data: cari });
+        return {
+          statusCode: 200, // or any other HTTP status code
+          body: JSON.stringify({ data: cari }),
+        };
       }
     }
 
-    if (req.method === "PATCH") {
+    if (event.httpMethod === "PATCH") {
       let { email, image, password, upload_CV } = req.body;
       let data = await Seaman.findOne({ email: email, password: password });
       if (!res) {
-        return res.json({ hi: "account tidak terbaca" });
+        return {
+          statusCode: 200, // or any other HTTP status code
+          body: JSON.stringify({ message: "tidak ada" }),
+        };
       } else {
         let convertImg = new Buffer.from(image, "base64");
         let convertCv = new Buffer.from(upload_CV, "base64");
@@ -48,7 +59,9 @@ export default async function seamen(req, res) {
       res.json({ error: err });
     }
   } catch (error) {
-    console.error("Error:", error.message);
-    res.status(500).json({ msg: "Internal server error" });
+    return {
+      statusCode: 500, // or any other HTTP status code
+      body: JSON.stringify({ message: "internal err" }),
+    };
   }
-}
+};

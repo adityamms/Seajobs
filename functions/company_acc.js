@@ -1,7 +1,7 @@
 import employer from "@/model/employer";
 import { connectToDB } from "@/utils/conectDb";
 
-export default async function company_acc(req, res) {
+exports.handler = async (event, context) => {
   if (req.method === "PATCH") {
     try {
       let connection = await connectToDB();
@@ -19,13 +19,15 @@ export default async function company_acc(req, res) {
         },
         { upsert: true, new: true } // 'new: true' returns the updated document
       );
-
-      res.json(cari);
+      return {
+        statusCode: 200, // or any other HTTP status code
+        body: JSON.stringify(cari),
+      };
     } catch (error) {
-      console.error(error.message);
-      res.status(500).json({ err: error.message });
+      return {
+        statusCode: 500, // or any other HTTP status code
+        body: JSON.stringify({ err: error }),
+      };
     }
-  } else {
-    res.status(405).json({ message: "Method not allowed" });
   }
-}
+};

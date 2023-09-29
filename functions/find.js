@@ -1,8 +1,8 @@
 import Employer from "@/model/employer";
 import { connectToDB } from "@/utils/conectDb";
 
-export default async function find(req, res) {
-  if (req.method === "POST") {
+exexports.handler = async (event, context) => {
+  if (event.httpMethod === "POST") {
     try {
       console.log(req.body);
       await connectToDB();
@@ -25,14 +25,20 @@ export default async function find(req, res) {
 
       if (!cari || cari.length === 0) {
         // Handle case where no matching employers are found
-        res.status(404).json({ message: "No matching employers found." });
-        return;
+        return {
+          statusCode: 404, // or any other HTTP status code
+          body: JSON.stringify({ message: "no matching found" }),
+        };
       }
-
-      res.status(200).json(cari);
+      return {
+        statusCode: 200, // or any other HTTP status code
+        body: JSON.stringify(cari),
+      };
     } catch (error) {
-      console.error(error.message);
-      res.status(500).json({ err: "Internal server error" });
+      return {
+        statusCode: 500, // or any other HTTP status code
+        body: JSON.stringify({ err: "error internal server" }),
+      };
     }
   }
-}
+};

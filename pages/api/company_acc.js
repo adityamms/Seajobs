@@ -1,5 +1,5 @@
-import employer from "@/model/employer";
-import { connectToDB } from "@/utils/conectDb";
+import employer from "@/model/employer.js";
+import { connectToDB } from "@/utils/conectDb.js";
 
 export default async function company_acc(req, res) {
   if (req.method === "PATCH") {

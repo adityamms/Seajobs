@@ -1,11 +1,11 @@
-import { connectToDB } from "@/utils/conectDb";
 import employer from "@/model/employer";
-import seaman from "@/model/seaman";
+import seaman from "@/model/seaman.js";
+import { connectToDB } from "@/utils/conectDb";
 
-export default async function hello(req, res) {
+exports.handler = async (event, context) => {
   await connectToDB();
 
-  if (req.method === "GET") {
+  if (event.httpMethod === "GET") {
     try {
       const limit = 15; // You can specify the limit as a query parameter
 
@@ -20,14 +20,21 @@ export default async function hello(req, res) {
 
       if (!cari || cari.length === 0) {
         // Handle case where no matching employers are found
-        res.status(404).json({ message: "No matching employers found." });
-        return;
+        return {
+          statusCode: 404, // or any other HTTP status code
+          body: JSON.stringify({ message: "no matching" }),
+        };
       }
 
-      res.status(200).json(cari);
+      return {
+        statusCode: 200, // or any other HTTP status code
+        body: JSON.stringify(cari),
+      };
     } catch (error) {
-      console.error(error.message);
-      res.status(500).json({ err: "Internal server error" });
+      return {
+        statusCode: 500, // or any other HTTP status code
+        body: JSON.stringify({ err: error }),
+      };
     }
   }
 
@@ -50,8 +57,8 @@ export default async function hello(req, res) {
         await baru.save();
         res.status(200).end();
       } catch (error) {
-        console.log(error);
+        console.log(error.msg);
         res.status(400).json({ meg: "gagal" });
       }
   }
-}
+};

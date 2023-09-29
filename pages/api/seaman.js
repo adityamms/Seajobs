@@ -1,5 +1,5 @@
-import Seaman from "@/model/seaman"; // Make sure to use the correct model name
-import { connectToDB } from "@/utils/conectDb";
+import Seaman from "@/model/seaman.js"; // Make sure to use the correct model name
+import { connectToDB } from "@/utils/conectDb.js";
 import { Binary } from "mongodb";
 
 export default async function seamen(req, res) {

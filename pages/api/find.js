@@ -1,5 +1,5 @@
-import Employer from "@/model/employer";
-import { connectToDB } from "@/utils/conectDb";
+import Employer from "@/model/employer.js";
+import { connectToDB } from "@/utils/conectDb.js";
 
 export default async function find(req, res) {
   if (req.method === "POST") {

@@ -1,5 +1,5 @@
-import Employer from "@/model/employer"; // Corrected the import statement
-import { connectToDB } from "@/utils/conectDb";
+import Employer from "@/model/employer.js"; // Corrected the import statement
+import { connectToDB } from "@/utils/conectDb.js";
 
 export default async function company(req, res) {
   try {
