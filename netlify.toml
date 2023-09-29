@@ -1,7 +1,6 @@
 [build]
 functions = "functions"
 command = "npm run build
- node_version = "20.5.1"
 
 [functions]
 node_bundler = "esbuild"
