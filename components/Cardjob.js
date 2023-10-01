@@ -4,7 +4,6 @@ import { ThemeContext } from "./ThemeProvider";
 import { UserContext } from "./UserProvider";
 import { Pagination } from "@mui/material";
 import axios from "axios";
-
 export default function Cardjob(props) {
   let { ubah, setUbah } = useContext(ThemeContext);
   let { data, setData } = useContext(UserContext);
@@ -27,9 +26,8 @@ export default function Cardjob(props) {
   };
 
   useEffect(() => {
-    let sendDate = new Date().getTime();
-
     let fetch = async () => {
+      let sendDate = new Date().getTime();
       let res = await axios.get(`.netlify/functions/hello`);
       if (res.status === 200) {
         let receiveDate = new Date().getTime();

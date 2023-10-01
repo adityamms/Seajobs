@@ -2,7 +2,7 @@ import { connectToDB } from "@/utils/conectDb";
 import seaman from "@/model/seaman";
 exports.handler = async (event, context) => {
   let sendDate = new Date().getTime();
-  await connectToDB();
+
   let receiveDate = new Date().getTime();
   let responseTimeMs = receiveDate - sendDate;
 

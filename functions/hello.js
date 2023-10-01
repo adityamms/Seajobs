@@ -3,7 +3,6 @@ import seaman from "@/model/seaman.js";
 import { connectToDB } from "@/utils/conectDb";
 
 exports.handler = async (event, context) => {
-  let sendDate = new Date().getTime();
   await connectToDB();
 
   if (event.httpMethod === "GET") {
@@ -19,9 +18,14 @@ exports.handler = async (event, context) => {
         .find(query, { lowongan: 1 })
         .limit(itemsLimit);
 
-      let receiveDate = new Date().getTime();
-      let responseTimeMs = receiveDate - sendDate;
-      console.log(responseTimeMs);
+      if (!cari || cari.length === 0) {
+        // Handle case where no matching employers are found
+        return {
+          statusCode: 404, // or any other HTTP status code
+          body: JSON.stringify({ message: "no matching" }),
+        };
+      }
+
       return {
         statusCode: 200, // or any other HTTP status code
         body: JSON.stringify(cari),
